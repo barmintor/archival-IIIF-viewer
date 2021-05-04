@@ -1,10 +1,13 @@
 import * as React from 'react';
 import Loading from '../../Loading';
 import './treeview.css';
+import PresentationApi from "../../fetch/PresentationApi";
+import IManifestData from "../../interface/IManifestData";
 import ITree from "../../interface/ITree";
 import TreeBuilder from "./TreeBuilder";
 import CaretDownIcon from '@material-ui/icons/ArrowDropDown';
 import CaretRightIcon from '@material-ui/icons/ArrowRight';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 interface IPros {
@@ -47,7 +50,23 @@ class TreeViewItem extends React.Component<IPros, IState> {
         }
 
         if ((!tree.children || tree.children.length === 0) && tree.hasLockedChildren !== true) {
-            classNameCaret += ' aiiif-no-caret';
+            if (tree.hasLockedChildren !== true) {
+                if (tree.hasLockedChildren !== false) {
+                const thisC = this;
+                    (async() => {
+                        await new Promise((resolve, reject) => {
+                            PresentationApi.get(tree.id, function (d: IManifestData) {
+                                resolve(d);
+                            }, true);
+                        }).then(function (d: IManifestData) {
+                            tree.hasLockedChildren = d.collections.length > 0;
+                            thisC.setState({...thisC.state, tree: tree});
+                        });})();
+                    caret = <CircularProgress colorPrimary={iconStyle.color} size={(4 * iconStyle.fontSize / 6)} />;
+                } else {
+                    classNameCaret += ' aiiif-no-caret';
+                }
+            }
         } else if (this.state.isOpen) {
             caret = <CaretDownIcon style={iconStyle} />;
         } else {

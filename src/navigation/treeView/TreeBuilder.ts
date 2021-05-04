@@ -27,13 +27,6 @@ class TreeBuilder {
                     if (tree && tree.id === child.id) {
                         newChild.children = tree.children;
                         newChild.isOpen = true;
-                    } else {
-                        const d: IManifestData = await new Promise((resolve, reject) => {
-                            PresentationApi.get(child.id, function (d: IManifestData) {
-                                resolve(d);
-                            }, true);
-                        });
-                        newChild.hasLockedChildren = d.collections.length > 0;
                     }
                     tree2.children.push(newChild);
                 }
