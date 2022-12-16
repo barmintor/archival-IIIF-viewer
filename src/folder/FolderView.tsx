@@ -90,7 +90,7 @@ export default function FolderView() {
                 </div>
             </nav>
             <div>
-                <h1>{getLocalized(currentFolder.label)}</h1>
+                <h1 className="aiiif-header">{getLocalized(currentFolder.label)}</h1>
                 <div className={folderViewClassNames}>{content}</div>
             </div>
 

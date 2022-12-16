@@ -8,6 +8,7 @@ export default class Init {
 
     constructor(config: IConfigParameter) {
         const container = document.getElementById(config.id);
+        container!.classList.add('aiiif-root');
         const root = createRoot(container!);
         root.render(<App config={config}/>);
     }
