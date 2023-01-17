@@ -1,0 +1,65 @@
+
+.aiiif-topbar details.aiiif-dropdown > summary {
+  cursor: pointer;
+  list-style: none;
+  display:flex;
+  justify-content: center;
+}
+
+.aiiif-topbar details.aiiif-dropdown > summary > span.aiiif-button {
+  appearance: button;
+}
+
+.aiiif-topbar details.aiiif-dropdown > menu {
+  list-style: none;
+  position:absolute;
+  inset: 0.75rem auto auto 0px;
+  border:1px black solid;
+}
+
+.aiiif-topbar details.aiiif-dropdown {
+  position:relative;
+  display:inline-flex;
+  vertical-align: middle;
+}
+/* Place open dropdown menu above other content */
+.aiiif-topbar details.aiiif-dropdown[open] {
+  z-index: 2;
+}
+/* Adapted from Paul Götze https://medium.com/an-idea/the-details-of-a-dropdown-a817dc27e545
+   to capture clicks outside menu */
+.aiiif-topbar details.aiiif-dropdown[open] summary::before {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  cursor: default;
+  background-color: transparent;
+}
+.aiiif-topbar details.aiiif-dropdown[open] > menu {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  padding: 0;
+}
+.aiiif-topbar details.aiiif-dropdown[open] > menu > li {
+  width:100%;
+}
+.aiiif-topbar details.aiiif-dropdown[open] > menu > li > a {
+  display:inline-block;
+  width:100%;
+  padding: 0.125em 0 0.125em 0.5em;
+  text-decoration: none;
+  background-color: white;
+  color:darkgray;
+}
+.aiiif-topbar details.aiiif-dropdown[open] > menu > li > a:hover {
+  background-color: lightgray;
+  color: black;
+}
+.aiiif-topbar details.aiiif-dropdown[open] > menu > li > a.active {
+  background-color: blue;
+  color: white;
+}

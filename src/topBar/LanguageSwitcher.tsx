@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Translation } from 'react-i18next';
-import LanguageIcon from '@mui/icons-material/Language';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLanguage} from "@fortawesome/free-solid-svg-icons";
 import Config from '../lib/Config';
+import Dropdown from './Dropdown';
 import {ReactElement, useState} from 'react';
 import i18n from 'i18next';
 
@@ -13,13 +12,13 @@ declare let global: {
 
 export default function LanguageSwitcher() {
 
-    const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     if (global.config.getDisableLanguageSelection()) {
         return <></>;
     }
 
-    const open = (event: React.MouseEvent<HTMLDivElement>) => {
+    const open = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     }
 
@@ -40,25 +39,10 @@ export default function LanguageSwitcher() {
             continue;
         }
 
-        languages.push(<MenuItem key={i} onClick={() => changeLanguage(i)}>{translations[i]}</MenuItem>);
+        languages.push(<li key={i} onClick={() => changeLanguage(i)}>{translations[i]}</li>);
     }
 
-    return <>
-        <div className="aiiif-icon-button" onClick={open} aria-controls="language-switch-menu"
-             aria-haspopup="true">
-            <LanguageIcon/>
-            <Translation ns="common">{(t, { i18n }) => <p>{t('language')}</p>}</Translation>
-        </div>
-        <Menu
-            className="aiiif-language-switch-menu"
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            keepMounted
-            onClose={close}
-        >
-            {languages}
-        </Menu>
-    </>;
+    return Dropdown(faLanguage, 'language', languages);
 }
 
 

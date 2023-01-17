@@ -1,19 +1,20 @@
-.aiiif-fullscreen-button{
+.aiiif-fullscreen-button:fullscreen{
     position: absolute;
     top: 5px;
     right: 0;
-    width: 45px;
     z-index: 2;
 }
 
-.aiiif-embedded .aiiif-fullscreen-button{
+.aiiif-fullscreen-button:fullscreen .label {
+    display: none;
+}
+
+.aiiif-embedded{
     width: 90px;
 }
 
-
-.aiiif-fullscreen-button > button {
+.aiiif-fullscreen-button:fullscreen > button {
     border: none;
     background-color: transparent;
-    font-size: 1.6rem;
     cursor: pointer;
 }

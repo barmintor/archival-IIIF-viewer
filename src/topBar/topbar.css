@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+.aiiif-topbar details {
+    height: 100%;
+}
+
 .aiiif-bar {
     display: flex;
     height: 40px;
@@ -16,8 +20,17 @@
     padding: 0 8px;
 }
 
-.aiiif-icon-button {
-    margin: 0 6px;
+.aiiif-topbar .aiiif-icon-button {
+    height: min-content;
+}
+
+.aiiif-bar .aiiif-icon-button, .aiiif-topbar .aiiif-icon-button {
+    margin: 2px;
+    padding: 1px 6px;
+    border: 1px black solid;
+    border-radius: 2px;
+    background-color: transparent;
+    font-size: 1em;
     cursor: pointer;
     display: flex;
     vertical-align: middle;

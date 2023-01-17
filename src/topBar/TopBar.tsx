@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Cache from '../lib/Cache';
-import NavBarIcon from '@mui/icons-material/VerticalSplit';
 import LanguageSwitcher from './LanguageSwitcher';
 import {Translation} from 'react-i18next';
 import './topbar.css';
@@ -11,7 +10,7 @@ import {isSingleManifest} from "../lib/ManifestHelpers";
 import {useContext} from "react";
 import {AppContext} from "../AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {faList, faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 
 export default function TopBar() {
 
@@ -19,18 +18,18 @@ export default function TopBar() {
 
     return <div className="aiiif-topbar">
         {(currentManifest && !isSingleManifest(currentManifest)) &&
-            <div className="aiiif-icon-button" onClick={() => Cache.ee.emit('toggle-splitter-main')}>
-                <NavBarIcon />
-                <Translation ns="common">{(t, { i18n }) => <p>{t('navBar')}</p>}</Translation>
-            </div>
+            <button className="aiiif-icon-button" onClick={() => Cache.ee.emit('toggle-splitter-main')}>
+                <FontAwesomeIcon icon={faList} />
+                <Translation ns="common">{(t, { i18n }) => <span className="label">{t('navBar')}</span>}</Translation>
+            </button>
         }
         <LanguageSwitcher />
         <ExternalSearch />
         {Token.hasActiveToken() &&
-            <div className="aiiif-icon-button" onClick={() => Token.logout()}>
+            <button className="aiiif-icon-button" onClick={() => Token.logout()}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
-                <Translation ns="common">{(t, { i18n }) => <p>{t('logout')}</p>}</Translation>
-            </div>
+                <Translation ns="common">{(t, { i18n }) => <span className="label">{t('logout')}</span>}</Translation>
+            </button>
         }
        <FullscreenButton />
     </div>;
